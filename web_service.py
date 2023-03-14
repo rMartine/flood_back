@@ -12,11 +12,13 @@
 #               with the new color. The rest of the cells will keep their original color.
 
 from flask import Flask, abort, request, jsonify
+from flask_cors import cross_origin
 from flood import generated_flooded_grid
 
 app = Flask(__name__)
 
 @app.route('/flood', methods=['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def flood():
     if not request.json or not 'originalGrid' in request.json or not 'cellPosition' in request.json or not 'newColor' in request.json:
         abort(400)
@@ -25,3 +27,6 @@ def flood():
     newColor = request.json['newColor']
     floodedGrid = generated_flooded_grid(originalGrid, cellPosition, newColor)
     return jsonify({'floodedGrid': floodedGrid}), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)
