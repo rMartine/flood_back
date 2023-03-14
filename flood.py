@@ -11,5 +11,5 @@
 #               connected to it with the same color as the cell position flooded
 #               with the new color. The rest of the cells will keep their original color.
 
-def generade_flooded_grid(originalGrid, cellPosition, newColor):
+def generated_flooded_grid(originalGrid, cellPosition, newColor):
     return 'Flooded grid'
